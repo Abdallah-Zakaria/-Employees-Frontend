@@ -1,8 +1,30 @@
-import { Navbar, Container } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { Navbar, Container , ProgressBar } from 'react-bootstrap';
+import { If } from 'react-if';
 
 import './index.scss'
 
-function Header() {
+let progressInterval = null;
+
+function Header(props) {
+  const [progress, setProgress] = useState(0);
+  
+  useEffect(() => {
+    progressInterval = setInterval(() => {
+      setProgress(prev => prev + 15);
+    }, 130);
+  }, []);
+
+  useEffect(() => {
+    if (progress >= 100) {
+      clearInterval(progressInterval);
+      props.setLoaded(true)
+      setTimeout(() => {
+        setProgress(prev => prev + 15)
+      }, 850)
+    }
+  }, [progress]);
+
   return (
     <div>
       <Navbar >
@@ -17,6 +39,9 @@ function Header() {
             />{' '}
             <span style={{ fontWeight: 'bold', fontFamily: 'fantasy', color: '#464646' }}>Employees</span>
           </Navbar.Brand>
+          <If condition={progress < 110}>
+            <ProgressBar style={{ width: '50%' }} animated now={progress} />
+          </If>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <span style={{ fontWeight: 'bold', color: '#464646', marginRight: '8px' }}> Abdallah Zakaria</span>
             <img

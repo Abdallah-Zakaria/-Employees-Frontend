@@ -18,6 +18,7 @@ function TableData() {
   const [totalPages, setTotalPages] = useState(0);
   const [notFound, setNotFound] = useState(false);
   const [totalRuslt, setTotalRuslt] = useState(0);
+  const [isLoding, setIsLoading] = useState(false);
   const [request, setRequest] = useReducer((state, newState) => ({ ...state, ...newState }),
     { page: 1, depart_id: undefined, query: undefined, searchType: 'name' });
 
@@ -40,7 +41,9 @@ function TableData() {
 
   const onUpdate = async () => {
     try {
+      setIsLoading(true)
       const data1 = await superagent.get(`${API}/search`).query(request);
+      setIsLoading(false)
       setEmployees(data1.body.data);
       setTotalRuslt(data1.body.count);
       setTotalPages(Math.ceil(data1.body.count / 10));
@@ -70,7 +73,9 @@ function TableData() {
               </tr>
             </thead>
             <tbody>
-              <TableRows employees={employees} request={request} />
+              <If condition={!isLoding}>
+                <TableRows employees={employees} request={request} />
+              </If>
             </tbody>
           </Table>
         </Else>
