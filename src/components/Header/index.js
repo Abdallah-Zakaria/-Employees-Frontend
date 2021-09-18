@@ -32,7 +32,7 @@ function Header(props) {
           <Navbar.Brand href="#home">
             <img
               alt=""
-              src="/pwc.png"
+              src="./pwc.png"
               width="30"
               height="30"
               className="d-inline-block align-top"
@@ -46,7 +46,7 @@ function Header(props) {
             <span style={{ fontWeight: 'bold', color: '#464646', marginRight: '8px' }}> Abdallah Zakaria</span>
             <img
               alt=""
-              src="/abdallah-zakaria.jpg"
+              src="./abdallah-zakaria.jpg"
               className="d-inline-block align-top"
               width='36px'
               height='36px'

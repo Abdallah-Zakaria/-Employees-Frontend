@@ -60,7 +60,7 @@ function TableData() {
       <SearchBar request={request} departments={departments} setRequest={setRequest} />
       <If condition={notFound}>
         <Then>
-          <Image src={'/noResult.png'} style={{ alignSelf: 'center', height: '150px', margin: '150px', marginBottom: '166px' }} />
+          <Image src={'./noResult.png'} style={{ alignSelf: 'center', height: '150px', margin: '150px', marginBottom: '166px' }} />
         </Then>
         <Else>
           <Table style={{ minHeight: '450px' }} hover size="sm" >
